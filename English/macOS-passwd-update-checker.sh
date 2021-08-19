@@ -6,13 +6,13 @@ alert_days=90
 
 # ===========================================
 # get timestamp of last password changing time
-u=$(whoami)
-t=$(dscl . read /Users/"$u" | \
+user=$(whoami)
+update_timestamp=$(dscl . read /Users/"$user" | \
 	grep -A1 passwordLastSetTime | grep real | \
 	awk -F'real>|</real' '{print $2}')
 
 # transfer timestamp to readable foramt
-format_date=$(date -j -f %s "$t" 2> /dev/null)
+format_date=$(date -j -f %s "$update_timestamp" 2> /dev/null)
 
 echo "The last time the password changed was:"
 echo -e "\033[1;96m$format_date \033[0m"
@@ -21,10 +21,10 @@ echo -e "\033[1;96m$format_date \033[0m"
 # get timestamp of current time
 current_date=$(date +%s)
 
-# floor the $t
-t=$(echo "$t" | cut -d"." -f 1)
+# floor the $update_timestamp
+t=$(echo "$update_timestamp" | cut -d"." -f 1)
 # calculate time interval
-time_interval=$(expr $current_date \- $t)
+time_interval=$(expr $current_date \- $update_timestamp)
 
 seconds=$(expr $time_interval \% 60)
 minutes=$(expr $time_interval \/ 60 \% 60)

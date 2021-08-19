@@ -5,13 +5,13 @@ alert_days=90
 
 # ===========================================
 # 取得最近一次變更密碼時間的timestamp
-u=$(whoami)
-t=$(dscl . read /Users/"$u" | \
+user=$(whoami)
+update_timestamp=$(dscl . read /Users/"$user" | \
 	grep -A1 passwordLastSetTime | grep real | \
 	awk -F'real>|</real' '{print $2}')
 
 # 轉換timestamp成可閱讀的格式
-format_date=$(date -j -f %s "$t" 2> /dev/null)
+format_date=$(date -j -f %s "$update_timestamp" 2> /dev/null)
 
 echo "最近一次變更密碼的時間為："
 echo -e "\033[1;96m$format_date \033[0m"
@@ -20,10 +20,10 @@ echo -e "\033[1;96m$format_date \033[0m"
 # 取得當前時間的timestamp
 current_date=$(date +%s)
 
-# 將$t對個位數做無條件捨去
-t=$(echo "$t" | cut -d"." -f 1)
+# 將$update_timestamp對個位數做無條件捨去
+update_timestamp=$(echo "$update_timestamp" | cut -d"." -f 1)
 # 計算時間區間
-time_interval=$(expr $current_date \- $t)
+time_interval=$(expr $current_date \- $update_timestamp)
 
 seconds=$(expr $time_interval \% 60)
 minutes=$(expr $time_interval \/ 60 \% 60)
