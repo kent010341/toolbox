@@ -12,7 +12,7 @@ update_timestamp=$(dscl . read /Users/"$user" | \
     awk -F'real>|</real' '{print $2}')
 
 # transfer timestamp to readable foramt
-format_date=$(date -j -f %s "$update_timestamp" 2> /dev/null)
+format_date=$(date -j -f %s "$update_timestamp" +"%Y/%m/%d %H:%M:%S" 2> /dev/null)
 
 echo "The last time the password changed was:"
 echo -e "\033[1;96m$format_date \033[0m"
@@ -45,6 +45,6 @@ else
     echo "The password will expire at the following times:"
 
     limit_timestamp=$(expr $update_timestamp \+ $(expr $alert_days \* 86400))
-    format_limit=$(date -j -f %s "$limit_timestamp" 2> /dev/null)
+    format_limit=$(date -j -f %s "$limit_timestamp" +"%Y/%m/%d %H:%M:%S" 2> /dev/null)
     echo -e "\033[1;93m$format_limit \033[0m"
 fi

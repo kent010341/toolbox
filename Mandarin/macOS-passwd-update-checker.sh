@@ -11,7 +11,7 @@ update_timestamp=$(dscl . read /Users/"$user" | \
     awk -F'real>|</real' '{print $2}')
 
 # 轉換timestamp成可閱讀的格式
-format_date=$(date -j -f %s "$update_timestamp" 2> /dev/null)
+format_date=$(date -j -f %s "$update_timestamp" +"%Y/%m/%d %H:%M:%S" 2> /dev/null)
 
 echo "最近一次變更密碼的時間為："
 echo -e "\033[1;96m$format_date \033[0m"
@@ -44,6 +44,6 @@ else
     echo "密碼將於下述時間過期："
 
     limit_timestamp=$(expr $update_timestamp \+ $(expr $alert_days \* 86400))
-    format_limit=$(date -j -f %s "$limit_timestamp" 2> /dev/null)
+    format_limit=$(date -j -f %s "$limit_timestamp" +"%Y/%m/%d %H:%M:%S" 2> /dev/null)
     echo -e "\033[1;93m$format_limit \033[0m"
 fi
