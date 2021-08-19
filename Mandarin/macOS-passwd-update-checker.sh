@@ -7,8 +7,8 @@ alert_days=90
 # 取得最近一次變更密碼時間的timestamp
 user=$(whoami)
 update_timestamp=$(dscl . read /Users/"$user" | \
-	grep -A1 passwordLastSetTime | grep real | \
-	awk -F'real>|</real' '{print $2}')
+    grep -A1 passwordLastSetTime | grep real | \
+    awk -F'real>|</real' '{print $2}')
 
 # 轉換timestamp成可閱讀的格式
 format_date=$(date -j -f %s "$update_timestamp" 2> /dev/null)
@@ -32,19 +32,18 @@ days=$(expr $time_interval \/ 86400)
 
 # 判斷是否超過限制
 echo ""
+echo "距離上次變更 (不得大於 $alert_days 天)："
 if [ $time_interval -gt $(expr $alert_days \* 86400) ]; then
-	# 超過限制
-	echo "距離上次變更 (不得大於 $alert_days 天)："
-	echo -e "\033[1;91m$days 天 $hours 時 $minutes 分 $seconds 秒 \033[0m"
-	echo -e "\033[1;91m請立即變更密碼 \033[0m"
+    # 超過限制
+    echo -e "\033[1;91m$days 天 $hours 時 $minutes 分 $seconds 秒 \033[0m"
+    echo -e "\033[1;91m請立即變更密碼。 \033[0m"
 else
-	# 沒超過限制
-	echo "距離上次變更 (不得大於 $alert_days 天)："
-	echo -e "\033[1;93m$days 天 $hours 時 $minutes 分 $seconds 秒 \033[0m"
-	echo ""
-	echo "密碼將於下述時間過期："
+    # 沒超過限制
+    echo -e "\033[1;93m$days 天 $hours 時 $minutes 分 $seconds 秒 \033[0m"
+    echo ""
+    echo "密碼將於下述時間過期："
 
-	limit_timestamp=$(expr $update_timestamp \+ $(expr $alert_days \* 86400))
-	format_limit=$(date -j -f %s "$limit_timestamp" 2> /dev/null)
-	echo -e "\033[1;93m$format_limit \033[0m"
+    limit_timestamp=$(expr $update_timestamp \+ $(expr $alert_days \* 86400))
+    format_limit=$(date -j -f %s "$limit_timestamp" 2> /dev/null)
+    echo -e "\033[1;93m$format_limit \033[0m"
 fi
