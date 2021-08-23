@@ -9,8 +9,8 @@
 
 Show the time of the last password change, and check if the time between current date and changing time is greater than the value of `alert_days` (change it if you want).
 
-* Sample images:  
-  Not expired:  
-  ![](https://i.imgur.com/2bJrATA.png)  
-  Expired:  
-  ![](https://i.imgur.com/uFt6Tsh.png)  
+* Sample outputs:  
+  * Not expired:  
+    ![](https://i.imgur.com/2bJrATA.png)  
+  * Expired:  
+    ![](https://i.imgur.com/uFt6Tsh.png)  
