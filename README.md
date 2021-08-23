@@ -13,4 +13,4 @@ Show the time of the last password change, and check if the time between current
   Not expired:  
   ![](https://i.imgur.com/2bJrATA.png)  
   Expired:  
-  ![]()
+  ![](https://i.imgur.com/uFt6Tsh.png)  
