@@ -1,10 +1,9 @@
 # toolbox
 
-> Two language provided: Mandarin (zh-TW), English (en-US)
-> Seperate by folder.
+> Some tools provide two languages, en-US and zh-TW.
 
 ## List
-### macOS-passwd-update-checker.sh
+### macOS-passwd-update-checker_\<language>.sh
 > Warning: macOS only
 
 Show the time of the last password change, and check if the time between current date and changing time is greater than the value of `alert_days` (change it if you want).
