@@ -14,6 +14,16 @@ Show the time of the last password change, and check if the time between current
   * Expired:  
     ![](https://i.imgur.com/uFt6Tsh.png)  
 
+### new-sh-generator.sh
+* Usage:
+```
+./new-sh-generator.sh [option]
+    --filename <file name>, -f <file name>
+      name of this new script
+```
+
+Create a new shell script containing basic pattern.
+
 ### ws_server.py
 > Python 3.6 (or above)  
 > Requires `websockets` (can be installed by `pip install`)
