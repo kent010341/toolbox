@@ -24,6 +24,17 @@ Show the time of the last password change, and check if the time between current
 
 Create a new shell script containing basic pattern.
 
+### ping-logging.sh
+* Usage:
+```
+./ping-logging.sh [option]
+    --period <period>, -p <period>
+        period (in second) between each pings (default: 3)
+    --target <target ip/url>, -t <target ip/url>
+        ping target (default: google.com)
+```
+Infinite loop pinging the target IP/URL with specified period and write to a log file.  
+
 ### ws_server.py
 > Python 3.6 (or above)  
 > Requires `websockets` (can be installed by `pip install`)
