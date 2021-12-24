@@ -28,10 +28,12 @@ Create a new shell script containing basic pattern.
 * Usage:
 ```
 ./ping-logging.sh [option]
-    --period <period>, -p <period>
+    --period <period>, -T <period>
         period (in second) between each pings (default: 3)
-    --target <target ip/url>, -t <target ip/url>
+    --target <target ip/url>, -ip <target ip/url>
         ping target (default: google.com)
+    --path <path>, -p <path>
+        location of where the log is stored
 ```
 Infinite loop pinging the target IP/URL with specified period and write to a log file.  
 
