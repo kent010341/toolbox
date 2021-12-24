@@ -6,22 +6,29 @@ target="google.com"
 
 while (($#)); do
     case $1 in
-        "--period" | "-p")
+        "--period" | "-T")
             shift
             period=$1
             shift
         ;;
-        "--target" | "-t")
+        "--target" | "-ip")
             shift
             target=$1
             shift
         ;;
+        "--path" | "-p")
+            shift
+            cd $1
+            shift
+        ;;
         "--help" | "-h")
             echo "Usage: ./ping-logging.sh [options...]"
-            echo "    --period <period>, -p <period>"    
+            echo "    --period <period>, -T <period>"    
             echo "        period (in second) between each pings (default: 3)"
-            echo "    --target <target ip/url>, -t <target ip/url>"
+            echo "    --target <target ip/url>, -ip <target ip/url>"
             echo "        ping target (default: google.com)"
+            echo "    --path <path>, -p <path>"
+            echo "        location of where the log is stored"
             exit 1
         ;;
         *)
