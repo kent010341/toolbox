@@ -49,7 +49,7 @@ while true; do
     if [ "$(echo $output | grep "100.0% packet loss")" != "" ]; then
         echo -e "\033[1;91m[$curr_time] Ping $target failed. \033[0m"
     fi
-    echo "[$curr_time]\n$output\n" >> $log_filename
+    echo -e "[$curr_time]\n$output\n" >> $log_filename
 
     sleep "$period"s
 done
