@@ -13,7 +13,7 @@ while (($#)); do
             echo "Usage: ./new-sh-generator.sh [options...]"
             echo "    --filename <file name>, -f <file name>"    
             echo "        name of this new script"
-            exit 1
+            exit 0
         ;;
     esac
 done
@@ -35,7 +35,7 @@ param_1=default_param_1
 
 while ((\$#)); do
     case \$1 in
-    "--param_1" | "-p")
+        "--param_1" | "-p")
             shift
             param_1=\$1
             shift
@@ -44,7 +44,7 @@ while ((\$#)); do
             echo "Usage: ./$filename.sh [options...]"
             echo "    --param_1 <value>, -p <value>"
             echo "        description"
-            exit 1
+            exit 0
         ;;
     esac
 done
