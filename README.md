@@ -20,6 +20,8 @@ Show the time of the last password change, and check if the time between current
 ./new-sh-generator.sh [option]
     --filename <file name>, -f <file name>
       name of this new script
+    --path <path>, -p <path>
+        location of where the script run
 ```
 
 ### new-queuing-cmd-generator.sh
@@ -35,6 +37,8 @@ Show the time of the last password change, and check if the time between current
         Delay between each command
     --no-exit-if-error, -ne
         Disable all exit process when a command failed to run
+    --path <path>, -p <path>
+        location of where the script run
 ```
 Create a new shell script containing commands with queuing running process.
 
