@@ -15,6 +15,11 @@ while (($#)); do
             echo "        name of this new script"
             exit 0
         ;;
+        *)
+            echo "unknown argument '$1'"
+            echo "Use --help (or -h) to get the usage information."
+            exit 1
+        ;;
     esac
 done
 
@@ -45,6 +50,11 @@ while ((\$#)); do
             echo "    --param_1 <value>, -p <value>"
             echo "        description"
             exit 0
+        ;;
+        *)
+            echo "unknown argument '$1'"
+            echo "Use --help (or -h) to get the usage information."
+            exit 1
         ;;
     esac
 done

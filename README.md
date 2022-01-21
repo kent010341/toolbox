@@ -22,7 +22,21 @@ Show the time of the last password change, and check if the time between current
       name of this new script
 ```
 
-Create a new shell script containing basic pattern.
+### new-queuing-cmd-generator.sh
+* Usage: 
+```
+./new-queuing-cmd-generator.sh [options...]
+    --filename <file name>, -f <file name>    
+        name of this new script
+    --cmds <Bash commands ...>, -c <Bash commands ...>
+        Specify command(s), must be surrounding with double quotes("")
+        e.g., --cmds "command_1" "command_2"
+    --delay <seconds>, -d <seconds>
+        Delay between each command
+    --no-exit-if-error, -ne
+        Disable all exit process when a command failed to run
+```
+Create a new shell script containing commands with queuing running process.
 
 ### ping-logging.sh
 * Usage:

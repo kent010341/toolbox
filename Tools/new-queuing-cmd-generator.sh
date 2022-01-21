@@ -1,0 +1,131 @@
+#!/bin/bash
+
+filename="new-queue-sh"
+is_cmd_recording=false
+is_cmd_recorded=false
+delay=0
+is_exit_if_error=true
+tmp_filename=".new_$(date +%s).tmp"
+
+while (($#)); do
+    case $1 in
+        "--filename" | "-f")
+            shift
+            filename=$1
+            is_cmd_recording=false
+            shift
+        ;;
+        "--cmds" | "-c")
+            is_cmd_recording=true
+            touch $tmp_filename
+            shift
+        ;;
+        "--delay" | "-d")
+            shift
+            delay=$1
+            shift
+        ;;
+        "--no-exit-if-error" | "-ne")
+            is_exit_if_error=false
+            shift
+        ;;
+        "--help" | "-h")
+            echo "Usage: ./new-queuing-cmd-generator.sh [options...]"
+            echo "    --filename <file name>, -f <file name>"    
+            echo "        name of this new script"
+            echo "    --cmds <Bash commands ...>, -c <Bash commands ...>"
+            echo "        Specify command(s), must be surrounding with double quotes(\"\")"
+            echo "        e.g., --cmds \"command_1\" \"command_2\""
+            echo "    --delay <seconds>, -d <seconds>"
+            echo "        Delay between each command"
+            echo "    --no-exit-if-error, -ne"
+            echo "        Disable all exit process when a command failed to run"
+            exit 0
+        ;;
+        *)
+            if $is_cmd_recording || [ $1 != "" ] ; then
+                echo $1 >> $tmp_filename
+                shift
+
+                if ! $is_cmd_recorded; then
+                    is_cmd_recorded=true
+                fi
+            else
+                echo "unknown argument '$1'"
+                echo "Use --help (or -h) to get the usage information."
+                exit 1
+            fi
+        ;;
+    esac
+done
+
+if ! $is_cmd_recorded; then
+    echo -e "\033[1;91m[ERROR] There's no command specified. \033[0m"
+    
+    exit 1
+fi
+
+
+if [ "$(echo $filename | grep -E ".sh$")" != "" ]; then
+    filename=$(echo $filename | cut -d"." -f 1)
+fi
+
+while [ -f ""$filename".sh" ]; do
+    echo -e "\033[1;91m[WARNING] file '$filename' has already exist, renaming the new file to "$filename"_1 \033[0m"
+    filename="$filename"_1
+done
+
+cat > ""$filename".sh" <<EOF
+#!/bin/bash
+
+# default
+param_1=default_param_1
+
+while ((\$#)); do
+    case \$1 in
+        "--param_1" | "-p")
+            shift
+            param_1=\$1
+            shift
+        ;;
+        "--help" | "-h")
+            echo "Usage: ./$filename.sh [options...]"
+            echo "    --param_1 <value>, -p <value>"
+            echo "        description"
+            exit 0
+        ;;
+        *)
+            echo "unknown argument '$1'"
+            echo "Use --help (or -h) to get the usage information."
+            exit 1
+        ;;
+    esac
+done
+
+EOF
+
+write_str=""
+while read line; do
+    echo "echo -e \"\033[1;96m[INFO] Run '$line'\033[0m\"" >> ""$filename".sh"
+    echo "$line" >> ""$filename".sh"
+
+    if $is_exit_if_error; then
+        echo "if [ ! \$? -eq 0 ]; then" >> ""$filename".sh"
+        echo "    echo -e \"\033[1;91m[ERROR] '$line' failed to run \033[0m\"" >> ""$filename".sh"
+        echo "    exit 1" >> ""$filename".sh"
+        echo "fi" >> ""$filename".sh"
+    fi
+
+    if [ $delay -gt 0 ]; then
+        echo "sleep $delay" >> ""$filename".sh"
+    fi
+    echo "" >> ""$filename".sh"
+done < $tmp_filename
+
+echo "echo -e \"\033[1;93m[SUCCESS] Script run succeed. \033[0m\"" >> ""$filename".sh"
+
+rm $tmp_filename
+
+chmod +x ""$filename".sh"
+
+echo -e "\033[1;93m[SUCCESS] Creating file succeed. \033[0m"
