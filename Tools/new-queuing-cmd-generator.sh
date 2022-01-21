@@ -18,6 +18,7 @@ while (($#)); do
         "--cmds" | "-c")
             is_cmd_recording=true
             touch $tmp_filename
+            pwd_tmp_filename="$(pwd)/$tmp_filename"
             shift
         ;;
         "--delay" | "-d")
@@ -140,7 +141,7 @@ done < $tmp_filename
 
 echo "echo -e \"\033[1;93m[SUCCESS] Script run succeed. \033[0m\"" >> ""$filename".sh"
 
-rm $tmp_filename
+rm $pwd_tmp_filename
 
 chmod +x ""$filename".sh"
 
