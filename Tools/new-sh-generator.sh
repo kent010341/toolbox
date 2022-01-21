@@ -9,10 +9,17 @@ while (($#)); do
             filename=$1
             shift
         ;;
+        "--path" | "-p")
+            shift
+            cd $1
+            shift
+        ;;
         "--help" | "-h")
             echo "Usage: ./new-sh-generator.sh [options...]"
             echo "    --filename <file name>, -f <file name>"    
             echo "        name of this new script"
+            echo "    --path <path>, -p <path>"
+            echo "        location of where the script run"
             exit 0
         ;;
         *)
@@ -45,14 +52,21 @@ while ((\$#)); do
             param_1=\$1
             shift
         ;;
+        "--path" | "-p")
+            shift
+            cd \$1
+            shift
+        ;;
         "--help" | "-h")
             echo "Usage: ./$filename.sh [options...]"
             echo "    --param_1 <value>, -p <value>"
             echo "        description"
+            echo "    --path <path>, -p <path>"
+            echo "        location of where the script run"
             exit 0
         ;;
         *)
-            echo "unknown argument '$1'"
+            echo "unknown argument '\$1'"
             echo "Use --help (or -h) to get the usage information."
             exit 1
         ;;

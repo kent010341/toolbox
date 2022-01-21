@@ -29,6 +29,11 @@ while (($#)); do
             is_exit_if_error=false
             shift
         ;;
+        "--path" | "-p")
+            shift
+            cd $1
+            shift
+        ;;
         "--help" | "-h")
             echo "Usage: ./new-queuing-cmd-generator.sh [options...]"
             echo "    --filename <file name>, -f <file name>"    
@@ -40,6 +45,8 @@ while (($#)); do
             echo "        Delay between each command"
             echo "    --no-exit-if-error, -ne"
             echo "        Disable all exit process when a command failed to run"
+            echo "    --path <path>, -p <path>"
+            echo "        location of where the script run"
             exit 0
         ;;
         *)
@@ -88,14 +95,21 @@ while ((\$#)); do
             param_1=\$1
             shift
         ;;
+        "--path" | "-p")
+            shift
+            cd \$1
+            shift
+        ;;
         "--help" | "-h")
             echo "Usage: ./$filename.sh [options...]"
             echo "    --param_1 <value>, -p <value>"
             echo "        description"
+            echo "    --path <path>, -p <path>"
+            echo "        location of where the script run"
             exit 0
         ;;
         *)
-            echo "unknown argument '$1'"
+            echo "unknown argument '\$1'"
             echo "Use --help (or -h) to get the usage information."
             exit 1
         ;;
