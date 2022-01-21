@@ -123,12 +123,14 @@ while read line; do
     echo "echo -e \"\033[1;96m[INFO] Run '$line'\033[0m\"" >> ""$filename".sh"
     echo "$line" >> ""$filename".sh"
 
+    echo "if [ ! \$? -eq 0 ]; then" >> ""$filename".sh"
+    echo "    echo -e \"\033[1;91m[ERROR] '$line' failed to run \033[0m\"" >> ""$filename".sh"
+
     if $is_exit_if_error; then
-        echo "if [ ! \$? -eq 0 ]; then" >> ""$filename".sh"
-        echo "    echo -e \"\033[1;91m[ERROR] '$line' failed to run \033[0m\"" >> ""$filename".sh"
         echo "    exit 1" >> ""$filename".sh"
-        echo "fi" >> ""$filename".sh"
     fi
+    
+    echo "fi" >> ""$filename".sh"
 
     if [ $delay -gt 0 ]; then
         echo "sleep $delay" >> ""$filename".sh"
