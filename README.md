@@ -3,7 +3,7 @@
 > Some tools provide two languages, en-US and zh-TW.
 
 ## Tools
-### macOS-passwd-update-checker_\<language>.sh
+### macOS-passwd-update-checker_\<language>
 > Warning: macOS only
 
 Show the time of the last password change, and check if the time between current date and changing time is greater than the value of `alert_days` (change it if you want).
@@ -14,20 +14,20 @@ Show the time of the last password change, and check if the time between current
   * Expired:  
     ![](https://i.imgur.com/uFt6Tsh.png)  
 
-### new-sh-generator.sh
+### new-sh-generator
 * Usage:
 ```
-./new-sh-generator.sh [option]
+./new-sh-generator [option]
     --filename <file name>, -f <file name>
       name of this new script
     --path <path>, -p <path>
         location of where the script run
 ```
 
-### new-queuing-cmd-generator.sh
+### new-queuing-cmd-generator
 * Usage: 
 ```
-./new-queuing-cmd-generator.sh [options...]
+./new-queuing-cmd-generator [options...]
     --filename <file name>, -f <file name>    
         name of this new script
     --cmds <Bash commands ...>, -c <Bash commands ...>
@@ -42,10 +42,10 @@ Show the time of the last password change, and check if the time between current
 ```
 Create a new shell script containing commands with queuing running process.
 
-### ping-logging.sh
+### ping-logging
 * Usage:
 ```
-./ping-logging.sh [option]
+./ping-logging [option]
     --period <period>, -T <period>
         period (in second) between each pings (default: 3)
     --target <target ip/url>, -ip <target ip/url>
@@ -65,9 +65,9 @@ Use URL `ws://localhost:8765` to connect it.
 ---
 
 ## Patterns
-### multi-params.sh
+### multi-params
 Just a sample shows a common shell command pattern.
 ```
-./multi-params.sh [--param_a <param_a>] [--param_b <param_b>]
-./multi-params.sh [--help]
+./multi-params [--param_a <param_a>] [--param_b <param_b>]
+./multi-params [--help]
 ```
