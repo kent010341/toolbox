@@ -62,6 +62,17 @@ Infinite loop pinging the target IP/URL with specified period and write to a log
 Start a simple WebSocket server on port 8765.  
 Use URL `ws://localhost:8765` to connect it. 
 
+### show_folder_tree.py
+* Usage:
+```
+python show_folder_tree.py [options]
+    --path <folder path>, -p <folder path>')
+        path of the folder'
+    --output <file path>, -o <file path>'
+        output file name'
+```
+Write the folder structure to a file.
+
 ---
 
 ## Patterns
