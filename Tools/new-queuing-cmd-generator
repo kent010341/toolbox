@@ -36,7 +36,7 @@ while (($#)); do
             shift
         ;;
         "--help" | "-h")
-            echo "Usage: ./new-queuing-cmd-generator.sh [options...]"
+            echo "Usage: ./new-queuing-cmd-generator [options...]"
             echo "    --filename <file name>, -f <file name>"    
             echo "        name of this new script"
             echo "    --cmds <Bash commands ...>, -c <Bash commands ...>"
@@ -73,17 +73,12 @@ if ! $is_cmd_recorded; then
     exit 1
 fi
 
-
-if [ "$(echo $filename | grep -E ".sh$")" != "" ]; then
-    filename=$(echo $filename | cut -d"." -f 1)
-fi
-
-while [ -f ""$filename".sh" ]; do
+while [ -f "$filename" ]; do
     echo -e "\033[1;91m[WARNING] file '$filename' has already exist, renaming the new file to "$filename"_1 \033[0m"
     filename="$filename"_1
 done
 
-cat > ""$filename".sh" <<EOF
+cat > $filename <<EOF
 #!/bin/bash
 
 # default
@@ -102,7 +97,7 @@ while ((\$#)); do
             shift
         ;;
         "--help" | "-h")
-            echo "Usage: ./$filename.sh [options...]"
+            echo "Usage: ./$filename [options...]"
             echo "    --param_1 <value>, -p <value>"
             echo "        description"
             echo "    --path <path>, -p <path>"
@@ -121,28 +116,28 @@ EOF
 
 write_str=""
 while read line; do
-    echo "echo -e \"\033[1;96m[INFO] Run '$line'\033[0m\"" >> ""$filename".sh"
-    echo "$line" >> ""$filename".sh"
+    echo "echo -e \"\033[1;96m[INFO] Run '$line'\033[0m\"" >> $filename
+    echo "$line" >> $filename
 
-    echo "if [ ! \$? -eq 0 ]; then" >> ""$filename".sh"
-    echo "    echo -e \"\033[1;91m[ERROR] '$line' failed to run \033[0m\"" >> ""$filename".sh"
+    echo "if [ ! \$? -eq 0 ]; then" >> $filename
+    echo "    echo -e \"\033[1;91m[ERROR] '$line' failed to run \033[0m\"" >> $filename
 
     if $is_exit_if_error; then
-        echo "    exit 1" >> ""$filename".sh"
+        echo "    exit 1" >> $filename
     fi
     
-    echo "fi" >> ""$filename".sh"
+    echo "fi" >> $filename
 
     if [ $delay -gt 0 ]; then
-        echo "sleep $delay" >> ""$filename".sh"
+        echo "sleep $delay" >> $filename
     fi
-    echo "" >> ""$filename".sh"
+    echo "" >> $filename
 done < $tmp_filename
 
-echo "echo -e \"\033[1;93m[SUCCESS] Script run succeed. \033[0m\"" >> ""$filename".sh"
+echo "echo -e \"\033[1;93m[SUCCESS] Script run succeed. \033[0m\"" >> $filename
 
 rm $pwd_tmp_filename
 
-chmod +x ""$filename".sh"
+chmod +x $filename
 
 echo -e "\033[1;93m[SUCCESS] Creating file succeed. \033[0m"
