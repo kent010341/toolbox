@@ -65,7 +65,7 @@ Use URL `ws://localhost:8765` to connect it.
 ### show_folder_tree.py
 * Usage:
 ```
-python show_folder_tree.py [options]
+python show_folder_tree.py <--path | -p> <folder path> [options]
     --path <folder path>, -p <folder path>')
         path of the folder'
     --output <file path>, -o <file path>'
