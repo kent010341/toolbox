@@ -20,7 +20,7 @@ def args_parse(args):
             elif arg == '--output' or arg == '-o':
                 output_path = next(iterator)
             elif arg == '--help' or arg == '-h':
-                print('Usage: python show_folder_tree.py [options]')
+                print('Usage: python show_folder_tree.py <--path | -p> <folder path> [options]')
                 print('    --path <folder path>, -p <folder path>')
                 print('        path of the folder')
                 print('    --output <file path>, -o <file path>')
@@ -62,9 +62,9 @@ def list_files(ident, path, subfolder):
             if not is_leaf_folder(get_full_path(full_path, d)):
                 list_files(ident+1, full_path, d)
         elif d[:-5] != subfolder:
-            write(str_indent + d[:-5] + '  ')
+            write(str_indent + d[:-5] + '<br>')
     
-    write(str_indent + '</ul></details>')
+    write(str_indent + '</details></ul>')
 
 def main(args):
     args_parse(args)
