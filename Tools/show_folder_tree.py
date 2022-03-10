@@ -42,9 +42,6 @@ def get_full_path(path, subfolder):
     sep = '' if path[-1] == '/' else '/'
     return path + sep + subfolder
 
-def is_leaf_folder(path):
-    return len(os.listdir(path)) == 1
-
 def list_files(ident, path, subfolder):
     str_indent = base_ident * ident
 
@@ -57,12 +54,11 @@ def list_files(ident, path, subfolder):
     dirs = sorted(os.listdir(full_path))
 
     for d in dirs:
-        if d[-5:] != '.json':
+        if os.path.isdir(get_full_path(full_path, d)):
             # not end with json => folder
-            if not is_leaf_folder(get_full_path(full_path, d)):
-                list_files(ident+1, full_path, d)
-        elif d[:-5] != subfolder:
-            write(str_indent + d[:-5] + '<br>')
+            list_files(ident+1, full_path, d)
+        else:
+            write(str_indent + d + '<br>')
     
     write(str_indent + '</details></ul>')
 
