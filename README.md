@@ -71,7 +71,7 @@ python show_folder_tree.py [options]
     --output <file path>, -o <file path>'
         output file name'
 ```
-Write the folder structure to a file.
+Write the folder structure to a markdown file.
 
 ---
 
