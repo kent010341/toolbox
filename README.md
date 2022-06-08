@@ -75,6 +75,45 @@ Write the folder structure to a markdown file.
 
 ---
 
+## Crawlers
+### images
+* Usage:  
+  Edit the file `settings.cfg` to set this crawler.  
+
+|section|key|optional|type|description|sample|
+|-|-|:-:|:-:|-|-|
+|URL|url.format|X|`string`|URL format, use `{}` for the parameters placeholder.<br>You can also use `{0}`, `{1}`, etc.|`https://example.com/{}/{}_{}.jpg`<br>`https://example.com/{1}/{0}_{2}.jpg`|
+|URL|url.param.count|X|`int`|The count of URL parameters. The same amount of `url.param.<param_number>` set should be added|`3`|
+|URL|url.param.1.start|Δ|`int`|Start number of parameter 1|`1`|
+|URL|url.param.1.end|Δ|`int`|End number of parameter 1|`3`|
+|URL|url.param.1.list|Δ|`string`|Use for non-number values for parameter 1|`ABCD`|
+|URL|url.param.1.digits|O|`int`|Left filling each value of parameter 1 with zeros in a string of specified length|`5`|
+|OUTPUT|output.threads|O (default:`2`)|`int`|Threads for downloading images|`4`|
+|OUTPUT|output.folder.path|X|`string`|The folder path for storing images|`./output`|
+|OUTPUT|output.extension|X|`string`|File extension name of images|`.jpg`|
+|OUTPUT|output.format|X|`string`|File name format, use `{}` for the parameters placeholder.<br>You can also use `{0}`, `{1}`, etc.|`{}-{}_{}`|
+
+If you set `url.param.count` as `1`, you should also have `url.param.1.start` and `url.param.1.end` or `url.param.1.list`.  
+
+For example, `url.param.count = 2`, there should be something like:  
+```
+url.param.1.start = 1
+url.param.1.end = 2
+
+url.param.2.start = 3
+url.param.2.end = 4
+```
+
+or  
+```
+url.param.1.start = 1
+url.param.1.end = 2
+
+url.param.2.list = ABC
+```
+
+---
+
 ## Patterns
 ### multi-params
 Just a sample shows a common shell command pattern.
