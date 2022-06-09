@@ -90,8 +90,9 @@ Write the folder structure to a markdown file.
 |URL|url.param.1.digits|O|`int`|Left filling each value of parameter 1 with zeros in a string of specified length|`5`|
 |OUTPUT|output.threads|O (default:`2`)|`int`|Threads for downloading images|`4`|
 |OUTPUT|output.folder.path|X|`string`|The folder path for storing images|`./output`|
-|OUTPUT|output.extension|X|`string`|File extension name of images|`.jpg`|
-|OUTPUT|output.format|X|`string`|File name format, use `{}` for the parameters placeholder.<br>You can also use `{0}`, `{1}`, etc.|`{}-{}_{}`|
+|OUTPUT|output.file.extension|X|`string`|File extension name of images|`.jpg`|
+|OUTPUT|output.file.format|X|`string`|File name format, use `{}` for the parameters placeholder.<br>You can also use `{0}`, `{1}`, etc.|`{}-{}_{}`|
+|OUTPUT|output.file.replace|O (default:`False`)|`bool`|If the file exists, replace it?<br>This value is case-insensitive.|`False`<br>`True`|
 
 If you set `url.param.count` as `1`, you should also have `url.param.1.start` and `url.param.1.end` or `url.param.1.list`.  
 
