@@ -102,10 +102,11 @@ def get_image(cfg, param):
     )
 
     # delete the file
-    if cfg[OUTPUT_FILE_REPLACE]:
-        os.remove(file_path)
-    else:
-        return None
+    if os.path.exists(file_path):
+        if cfg[OUTPUT_FILE_REPLACE]:
+            os.remove(file_path)
+        else:
+            return None
 
     r = requests.get(url, stream=True)
 
