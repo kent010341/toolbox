@@ -73,6 +73,13 @@ python show_folder_tree.py <--path | -p> <folder path> [options]
 ```
 Write the folder structure to a markdown file.
 
+### docker-init
+* Usage:
+```
+./docker-init
+```
+Install docker engine. Following this [tutorial](https://docs.docker.com/engine/install/ubuntu).
+
 ---
 
 ## Crawlers
